@@ -15,7 +15,7 @@ $aModule = array(
         'en' => 'Extends the original mail class and adds some usefull functions.',
     ),
     'thumbnail' => '',
-    'version'   => '0.1',
+    'version'   => '0.2',
     'author'    => 'Rico Wunglück',
     'url'       => 'http://www.hundemineral.de',
     'email'     => 'kontakt@hundemineral.de',
