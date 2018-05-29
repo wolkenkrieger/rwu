@@ -94,17 +94,10 @@ class rwu_mailextender_oxemail extends rwu_mailextender_oxemail_parent
         $oSmarty->security_settings['INCLUDE_ANY'] = $aStore['INCLUDE_ANY'] ;
 
         //Sets subject to email
-		//$error =  oxRegistry::getLang()->translateString('DX_TRACKINGCODE_ERRORMSG', $iBaseLanguage, false);			
 		$orderFolder = $oOrder->oxorder__oxfolder->value;
-		switch ($orderFolder) {
-			case 'ORDERFOLDER_NEW':			$sSubject = $oLang->translateString('MAIL_SUBJECT_NEW'); break;
-			case 'ORDERFOLDER_PROBLEMS':	$sSubject = $oLang->translateString('MAIL_SUBJECT_PROBLEMS'); break;
-			case 'ORDERFOLDER_ACCEPTED':	$sSubject = $oLang->translateString('MAIL_SUBJECT_ACCEPTED'); break;
-			case 'ORDERFOLDER_FINISHED':	$sSubject = $oLang->translateString('MAIL_SUBJECT_FINISHED'); break;
-			case 'ORDERFOLDER_STORNO':		$sSubject = $oLang->translateString('MAIL_SUBJECT_STORNO'); break;
-			case 'ORDERFOLDER_REMINDER':	$sSubject = $oLang->translateString('MAIL_SUBJECT_REMINDER'); break;										
-		}
-        $this->setSubject( ( $sSubject !== null ) ? $sSubject : $oShop->oxshops__oxsendednowsubject->getRawValue() );
+		$orderStatus = strrchr($orderFolder, '_');
+		$sSubject = $oLang->translateString('MAIL_SUBJECT' . $orderStatus);
+		$this->setSubject( ( $sSubject !== null ) ? $sSubject : $oShop->oxshops__oxsendednowsubject->getRawValue() );
 		
 
         $sFullName = $oOrder->oxorder__oxbillfname->getRawValue() . " " . $oOrder->oxorder__oxbilllname->getRawValue();
